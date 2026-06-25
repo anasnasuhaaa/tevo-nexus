@@ -10,5 +10,8 @@
     "dev:nexus": "npm run dev --workspace=nexus",
     "build:nexus": "npm run build --workspace=nexus",
     "lint:nexus": "npm run lint --workspace=nexus"
+  },
+  "overrides": {
+    "kysely": "0.28.8"
   }
 }

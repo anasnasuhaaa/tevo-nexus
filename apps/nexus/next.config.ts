@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  typedRoutes: false,
+  transpilePackages: ["@orma/database"],
 };
 
 export default nextConfig;
