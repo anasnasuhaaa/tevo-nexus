@@ -12,6 +12,12 @@ export const auth = betterAuth({
     disableSignUp: process.env.ALLOW_AUTH_SEED_SIGNUP !== "true",
   },
 
+  session: {
+    expiresIn: 60 * 30,
+    updateAge: 0,
+    disableSessionRefresh: true,
+  },
+
   user: {
     additionalFields: {
       role: {

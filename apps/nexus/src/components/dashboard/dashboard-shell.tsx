@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar";
+import { SessionExitGuard } from "@/components/dashboard/session-exit-guard";
 
 type DashboardShellProps = {
   children: ReactNode;
@@ -14,6 +15,8 @@ type DashboardShellProps = {
 export function DashboardShell({ children, user }: DashboardShellProps) {
   return (
     <div className="min-h-screen bg-muted/30 text-foreground">
+      <SessionExitGuard />
+
       <div className="flex min-h-screen">
         <DashboardSidebar />
 
