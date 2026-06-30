@@ -1,4 +1,5 @@
 import { prisma } from "@orma/database";
+import Link from "next/link";
 import {
   Activity,
   CheckCircle2,
@@ -6,6 +7,7 @@ import {
   Plus,
   Search,
   Timer,
+  Upload,
 } from "lucide-react";
 
 import { DataTable } from "@/components/data-table/data-table";
@@ -100,10 +102,17 @@ export default async function ProgramsPage() {
           </div>
 
           <div className="flex flex-col gap-2 sm:flex-row">
-            <div className="flex items-center gap-2 rounded-2xl border bg-card px-3 py-2 text-sm text-muted-foreground">
+            {/* <div className="flex items-center gap-2 rounded-2xl border bg-card px-3 py-2 text-sm text-muted-foreground">
               <Search className="size-4" />
               Filter aktif berdasarkan nama program
-            </div>
+            </div> */}
+
+            <Link href="/dashboard/programs/import">
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto">
+                <Upload className="size-4" />
+                Import XLSX
+              </Button>
+            </Link>
 
             <Button disabled className="bg-primary text-primary-foreground">
               <Plus className="size-4" />
