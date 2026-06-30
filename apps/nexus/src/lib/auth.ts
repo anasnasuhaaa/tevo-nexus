@@ -1,6 +1,7 @@
 import { prisma } from "@orma/database";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { admin } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -9,7 +10,7 @@ export const auth = betterAuth({
 
   emailAndPassword: {
     enabled: true,
-    disableSignUp: process.env.ALLOW_AUTH_SEED_SIGNUP !== "true",
+    disableSignUp: true,
   },
 
   session: {
@@ -39,6 +40,8 @@ export const auth = betterAuth({
       },
     },
   },
+
+  plugins: [admin()],
 
   trustedOrigins: ["http://localhost:3000"],
 });

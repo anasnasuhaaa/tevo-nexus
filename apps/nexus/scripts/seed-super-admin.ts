@@ -9,7 +9,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const nexusEnvPath = path.resolve(__dirname, "../.env.local");
-const databaseEnvPath = path.resolve(__dirname, "../../../packages/database/.env");
+const databaseEnvPath = path.resolve(
+  __dirname,
+  "../../../packages/database/.env",
+);
 
 config({
   path: nexusEnvPath,
@@ -21,7 +24,7 @@ config({
   override: false,
 });
 
-process.env.ALLOW_AUTH_SEED_SIGNUP = "true";
+// process.env.ALLOW_AUTH_SEED_SIGNUP = "true";
 
 const SUPER_ADMIN_EMAIL = "superadmin@nexus.local";
 const SUPER_ADMIN_PASSWORD = "SuperAdmin12345!";
@@ -71,11 +74,12 @@ async function main() {
   if (!existingUser || existingUser.accounts.length === 0) {
     console.log("Membuat akun Super Admin melalui Better Auth...");
 
-    await auth.api.signUpEmail({
+    await auth.api.createUser({
       body: {
         name: "Super Admin Nexus",
         email: SUPER_ADMIN_EMAIL,
         password: SUPER_ADMIN_PASSWORD,
+        role: "admin",
       },
     });
   } else {
@@ -93,6 +97,9 @@ async function main() {
       emailVerified: true,
       image: null,
       role: "SUPER_ADMIN",
+      banned: false,
+      banReason: null,
+      banExpires: null,
       mustChangePassword: true,
       memberId: superAdminMember.id,
       updatedAt: new Date(),

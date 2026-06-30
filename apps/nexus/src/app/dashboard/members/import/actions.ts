@@ -1,6 +1,7 @@
 "use server";
 
-import { prisma } from "@orma/database";
+import { OrganizationalPosition, prisma } from "@orma/database";
+import { auth } from "@/lib/auth";
 import * as XLSX from "xlsx";
 
 const REQUIRED_HEADERS = [
@@ -325,6 +326,261 @@ export async function parseMemberImportFile(
       totalRows: rows.length,
       validRows,
       invalidRows,
+    },
+  };
+}
+
+export type ConfirmImportResult = {
+  success: boolean;
+  message: string;
+  summary: {
+    importedRows: number;
+    skippedRows: number;
+  };
+};
+
+function getDefaultRoleFromPosition(position: string) {
+  const roleMap: Record<string, string> = {
+    KETUA_ORGANISASI: "BPH",
+    WAKIL_KETUA_ORGANISASI: "BPH",
+    SEKRETARIS_INTERNAL: "BPH",
+    SEKRETARIS_EKSTERNAL: "BPH",
+    BENDAHARA_INTERNAL: "BPH",
+    BENDAHARA_EKSTERNAL: "BPH",
+    KETUA_BIRDEP: "KETUA_BIRDEP",
+    SEKRETARIS_BIRDEP: "SEKRETARIS_BIRDEP",
+    BENDAHARA_BIRDEP: "BENDAHARA_BIRDEP",
+    ANGGOTA_BIRDEP: "ANGGOTA_BIRDEP",
+  };
+
+  return roleMap[position] ?? "ANGGOTA_BIRDEP";
+}
+
+function parseAdditionalRoles(value: string) {
+  return value
+    .split(",")
+    .map((role) => role.trim().toUpperCase())
+    .filter(Boolean);
+}
+
+export async function confirmMemberImportFile(
+  formData: FormData,
+): Promise<ConfirmImportResult> {
+  const preview = await parseMemberImportFile(formData);
+
+  if (!preview.success) {
+    return {
+      success: false,
+      message: preview.message,
+      summary: {
+        importedRows: 0,
+        skippedRows: 0,
+      },
+    };
+  }
+
+  if (preview.summary.invalidRows > 0) {
+    return {
+      success: false,
+      message:
+        "Import dibatalkan. Masih ada baris invalid, silakan perbaiki file terlebih dahulu.",
+      summary: {
+        importedRows: 0,
+        skippedRows: preview.summary.invalidRows,
+      },
+    };
+  }
+
+  const activeCabinet = await prisma.cabinetPeriod.findFirst({
+    where: {
+      isActive: true,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!activeCabinet) {
+    return {
+      success: false,
+      message: "Periode kabinet aktif belum tersedia.",
+      summary: {
+        importedRows: 0,
+        skippedRows: 0,
+      },
+    };
+  }
+
+  const birdeps = await prisma.birdep.findMany({
+    where: {
+      cabinetPeriodId: activeCabinet.id,
+      isActive: true,
+    },
+    select: {
+      id: true,
+      code: true,
+    },
+  });
+
+  const birdepByCode = new Map(birdeps.map((birdep) => [birdep.code, birdep]));
+
+  const roles = await prisma.role.findMany({
+    select: {
+      id: true,
+      code: true,
+    },
+  });
+
+  const roleByCode = new Map(roles.map((role) => [role.code, role]));
+
+  const validRoleCodes = new Set(roles.map((role) => role.code));
+
+  for (const row of preview.rows) {
+    const defaultRole = getDefaultRoleFromPosition(row.organizationalPosition);
+    const additionalRoles = parseAdditionalRoles(row.additionalRoles);
+
+    const allRoleCodes = Array.from(new Set([defaultRole, ...additionalRoles]));
+
+    for (const roleCode of allRoleCodes) {
+      if (!validRoleCodes.has(roleCode)) {
+        return {
+          success: false,
+          message: `Role ${roleCode} pada baris ${row.rowNumber} tidak ditemukan di database.`,
+          summary: {
+            importedRows: 0,
+            skippedRows: preview.rows.length,
+          },
+        };
+      }
+    }
+  }
+
+  let importedRows = 0;
+
+  for (const row of preview.rows) {
+    const birdep = birdepByCode.get(row.primaryBirdepCode);
+
+    if (!birdep) {
+      return {
+        success: false,
+        message: `Kode Birdep ${row.primaryBirdepCode} tidak ditemukan.`,
+        summary: {
+          importedRows,
+          skippedRows: preview.rows.length - importedRows,
+        },
+      };
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: row.email,
+      },
+    });
+
+    const existingMember = await prisma.member.findUnique({
+      where: {
+        nim: row.nim,
+      },
+    });
+
+    if (existingUser || existingMember) {
+      return {
+        success: false,
+        message: `Import dibatalkan. Data pada baris ${row.rowNumber} sudah ada di database.`,
+        summary: {
+          importedRows,
+          skippedRows: preview.rows.length - importedRows,
+        },
+      };
+    }
+
+    await auth.api.createUser({
+      body: {
+        name: row.fullName,
+        email: row.email,
+        password: row.temporaryPassword,
+        role: "user",
+      },
+    });
+
+    const createdUser = await prisma.user.findUniqueOrThrow({
+      where: {
+        email: row.email,
+      },
+    });
+
+    const createdMember = await prisma.member.create({
+      data: {
+        fullName: row.fullName,
+        nim: row.nim,
+        instagram: row.instagram || null,
+        isActive: row.isActive,
+      },
+    });
+
+    await prisma.membership.create({
+      data: {
+        memberId: createdMember.id,
+        cabinetPeriodId: activeCabinet.id,
+        primaryBirdepId: birdep.id,
+        organizationalPosition:
+          row.organizationalPosition as OrganizationalPosition,
+        internalTitle: row.internalTitle || null,
+        subdivision: row.subdivision || null,
+        programRoles: null,
+      },
+    });
+
+    await prisma.user.update({
+      where: {
+        id: createdUser.id,
+      },
+      data: {
+        name: row.fullName,
+        emailVerified: true,
+        image: null,
+        role: getDefaultRoleFromPosition(row.organizationalPosition),
+        mustChangePassword: true,
+        memberId: createdMember.id,
+        updatedAt: new Date(),
+      },
+    });
+
+    const defaultRole = getDefaultRoleFromPosition(row.organizationalPosition);
+    const additionalRoles = parseAdditionalRoles(row.additionalRoles);
+    const allRoleCodes = Array.from(new Set([defaultRole, ...additionalRoles]));
+
+    for (const roleCode of allRoleCodes) {
+      const role = roleByCode.get(roleCode);
+
+      if (!role) {
+        continue;
+      }
+
+      await prisma.userRole.upsert({
+        where: {
+          userId_roleId: {
+            userId: createdUser.id,
+            roleId: role.id,
+          },
+        },
+        update: {},
+        create: {
+          userId: createdUser.id,
+          roleId: role.id,
+        },
+      });
+    }
+
+    importedRows++;
+  }
+
+  return {
+    success: true,
+    message: `${importedRows} anggota berhasil diimport ke database.`,
+    summary: {
+      importedRows,
+      skippedRows: 0,
     },
   };
 }
