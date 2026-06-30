@@ -251,6 +251,9 @@ export type UserWhereInput = {
   accounts?: Prisma.AccountListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   permissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
+  createdPrograms?: Prisma.ProgramListRelationFilter
+  updatedPrograms?: Prisma.ProgramListRelationFilter
+  progressUpdates?: Prisma.ProgramProgressUpdateListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -272,6 +275,9 @@ export type UserOrderByWithRelationInput = {
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   userRoles?: Prisma.UserRoleOrderByRelationAggregateInput
   permissionOverrides?: Prisma.UserPermissionOverrideOrderByRelationAggregateInput
+  createdPrograms?: Prisma.ProgramOrderByRelationAggregateInput
+  updatedPrograms?: Prisma.ProgramOrderByRelationAggregateInput
+  progressUpdates?: Prisma.ProgramProgressUpdateOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -296,6 +302,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accounts?: Prisma.AccountListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   permissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
+  createdPrograms?: Prisma.ProgramListRelationFilter
+  updatedPrograms?: Prisma.ProgramListRelationFilter
+  progressUpdates?: Prisma.ProgramProgressUpdateListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -354,6 +363,9 @@ export type UserCreateInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -374,6 +386,9 @@ export type UserUncheckedCreateInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUpdateInput = {
@@ -394,6 +409,9 @@ export type UserUpdateInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -414,6 +432,9 @@ export type UserUncheckedUpdateInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -526,6 +547,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserCreateNestedManyWithoutMemberInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutMemberInput, Prisma.UserUncheckedCreateWithoutMemberInput> | Prisma.UserCreateWithoutMemberInput[] | Prisma.UserUncheckedCreateWithoutMemberInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberInput | Prisma.UserCreateOrConnectWithoutMemberInput[]
@@ -628,6 +654,54 @@ export type UserUpdateOneRequiredWithoutPermissionOverridesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPermissionOverridesInput, Prisma.UserUpdateWithoutPermissionOverridesInput>, Prisma.UserUncheckedUpdateWithoutPermissionOverridesInput>
 }
 
+export type UserCreateNestedOneWithoutCreatedProgramsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedProgramsInput, Prisma.UserUncheckedCreateWithoutCreatedProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProgramsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedProgramsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProgramsInput, Prisma.UserUncheckedCreateWithoutUpdatedProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProgramsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedProgramsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedProgramsInput, Prisma.UserUncheckedCreateWithoutCreatedProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProgramsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedProgramsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedProgramsInput, Prisma.UserUpdateWithoutCreatedProgramsInput>, Prisma.UserUncheckedUpdateWithoutCreatedProgramsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedProgramsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProgramsInput, Prisma.UserUncheckedCreateWithoutUpdatedProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProgramsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedProgramsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedProgramsInput, Prisma.UserUpdateWithoutUpdatedProgramsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedProgramsInput>
+}
+
+export type UserCreateNestedOneWithoutProgressUpdatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgressUpdatesInput, Prisma.UserUncheckedCreateWithoutProgressUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgressUpdatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutProgressUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgressUpdatesInput, Prisma.UserUncheckedCreateWithoutProgressUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgressUpdatesInput
+  upsert?: Prisma.UserUpsertWithoutProgressUpdatesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgressUpdatesInput, Prisma.UserUpdateWithoutProgressUpdatesInput>, Prisma.UserUncheckedUpdateWithoutProgressUpdatesInput>
+}
+
 export type UserCreateWithoutMemberInput = {
   id: string
   name: string
@@ -645,6 +719,9 @@ export type UserCreateWithoutMemberInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutMemberInput = {
@@ -664,6 +741,9 @@ export type UserUncheckedCreateWithoutMemberInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutMemberInput = {
@@ -728,6 +808,9 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -747,6 +830,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -782,6 +868,9 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -801,6 +890,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -820,6 +912,9 @@ export type UserCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -839,6 +934,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -874,6 +972,9 @@ export type UserUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -893,6 +994,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutUserRolesInput = {
@@ -912,6 +1016,9 @@ export type UserCreateWithoutUserRolesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -931,6 +1038,9 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -966,6 +1076,9 @@ export type UserUpdateWithoutUserRolesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -985,6 +1098,9 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutPermissionOverridesInput = {
@@ -1004,6 +1120,9 @@ export type UserCreateWithoutPermissionOverridesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutPermissionOverridesInput = {
@@ -1023,6 +1142,9 @@ export type UserUncheckedCreateWithoutPermissionOverridesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutPermissionOverridesInput = {
@@ -1058,6 +1180,9 @@ export type UserUpdateWithoutPermissionOverridesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionOverridesInput = {
@@ -1077,6 +1202,321 @@ export type UserUncheckedUpdateWithoutPermissionOverridesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutCreatedProgramsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutCreatedProgramsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  memberId?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutCreatedProgramsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedProgramsInput, Prisma.UserUncheckedCreateWithoutCreatedProgramsInput>
+}
+
+export type UserCreateWithoutUpdatedProgramsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedProgramsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  memberId?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedProgramsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProgramsInput, Prisma.UserUncheckedCreateWithoutUpdatedProgramsInput>
+}
+
+export type UserUpsertWithoutCreatedProgramsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedProgramsInput, Prisma.UserUncheckedUpdateWithoutCreatedProgramsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedProgramsInput, Prisma.UserUncheckedCreateWithoutCreatedProgramsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedProgramsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedProgramsInput, Prisma.UserUncheckedUpdateWithoutCreatedProgramsInput>
+}
+
+export type UserUpdateWithoutCreatedProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUpsertWithoutUpdatedProgramsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedProgramsInput, Prisma.UserUncheckedUpdateWithoutUpdatedProgramsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProgramsInput, Prisma.UserUncheckedCreateWithoutUpdatedProgramsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedProgramsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedProgramsInput, Prisma.UserUncheckedUpdateWithoutUpdatedProgramsInput>
+}
+
+export type UserUpdateWithoutUpdatedProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutProgressUpdatesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutProgressUpdatesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  role?: string
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  mustChangePassword?: boolean
+  memberId?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  createdPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPrograms?: Prisma.ProgramUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutProgressUpdatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgressUpdatesInput, Prisma.UserUncheckedCreateWithoutProgressUpdatesInput>
+}
+
+export type UserUpsertWithoutProgressUpdatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProgressUpdatesInput, Prisma.UserUncheckedUpdateWithoutProgressUpdatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgressUpdatesInput, Prisma.UserUncheckedCreateWithoutProgressUpdatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProgressUpdatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProgressUpdatesInput, Prisma.UserUncheckedUpdateWithoutProgressUpdatesInput>
+}
+
+export type UserUpdateWithoutProgressUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProgressUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyMemberInput = {
@@ -1111,6 +1551,9 @@ export type UserUpdateWithoutMemberInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberInput = {
@@ -1130,6 +1573,9 @@ export type UserUncheckedUpdateWithoutMemberInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  createdPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPrograms?: Prisma.ProgramUncheckedUpdateManyWithoutUpdatedByNestedInput
+  progressUpdates?: Prisma.ProgramProgressUpdateUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutMemberInput = {
@@ -1157,6 +1603,9 @@ export type UserCountOutputType = {
   accounts: number
   userRoles: number
   permissionOverrides: number
+  createdPrograms: number
+  updatedPrograms: number
+  progressUpdates: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1164,6 +1613,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
   permissionOverrides?: boolean | UserCountOutputTypeCountPermissionOverridesArgs
+  createdPrograms?: boolean | UserCountOutputTypeCountCreatedProgramsArgs
+  updatedPrograms?: boolean | UserCountOutputTypeCountUpdatedProgramsArgs
+  progressUpdates?: boolean | UserCountOutputTypeCountProgressUpdatesArgs
 }
 
 /**
@@ -1204,6 +1656,27 @@ export type UserCountOutputTypeCountPermissionOverridesArgs<ExtArgs extends runt
   where?: Prisma.UserPermissionOverrideWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProgressUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramProgressUpdateWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1224,6 +1697,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   permissionOverrides?: boolean | Prisma.User$permissionOverridesArgs<ExtArgs>
+  createdPrograms?: boolean | Prisma.User$createdProgramsArgs<ExtArgs>
+  updatedPrograms?: boolean | Prisma.User$updatedProgramsArgs<ExtArgs>
+  progressUpdates?: boolean | Prisma.User$progressUpdatesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1284,6 +1760,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   permissionOverrides?: boolean | Prisma.User$permissionOverridesArgs<ExtArgs>
+  createdPrograms?: boolean | Prisma.User$createdProgramsArgs<ExtArgs>
+  updatedPrograms?: boolean | Prisma.User$updatedProgramsArgs<ExtArgs>
+  progressUpdates?: boolean | Prisma.User$progressUpdatesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1301,6 +1780,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     userRoles: Prisma.$UserRolePayload<ExtArgs>[]
     permissionOverrides: Prisma.$UserPermissionOverridePayload<ExtArgs>[]
+    createdPrograms: Prisma.$ProgramPayload<ExtArgs>[]
+    updatedPrograms: Prisma.$ProgramPayload<ExtArgs>[]
+    progressUpdates: Prisma.$ProgramProgressUpdatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1715,6 +2197,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userRoles<T extends Prisma.User$userRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissionOverrides<T extends Prisma.User$permissionOverridesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionOverridesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPermissionOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPrograms<T extends Prisma.User$createdProgramsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdProgramsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPrograms<T extends Prisma.User$updatedProgramsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedProgramsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  progressUpdates<T extends Prisma.User$progressUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$progressUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramProgressUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2270,6 +2755,78 @@ export type User$permissionOverridesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.UserPermissionOverrideScalarFieldEnum | Prisma.UserPermissionOverrideScalarFieldEnum[]
+}
+
+/**
+ * User.createdPrograms
+ */
+export type User$createdProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Program
+   */
+  select?: Prisma.ProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Program
+   */
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
+  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
+}
+
+/**
+ * User.updatedPrograms
+ */
+export type User$updatedProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Program
+   */
+  select?: Prisma.ProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Program
+   */
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
+  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
+}
+
+/**
+ * User.progressUpdates
+ */
+export type User$progressUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgramProgressUpdate
+   */
+  select?: Prisma.ProgramProgressUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgramProgressUpdate
+   */
+  omit?: Prisma.ProgramProgressUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramProgressUpdateInclude<ExtArgs> | null
+  where?: Prisma.ProgramProgressUpdateWhereInput
+  orderBy?: Prisma.ProgramProgressUpdateOrderByWithRelationInput | Prisma.ProgramProgressUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramProgressUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramProgressUpdateScalarFieldEnum | Prisma.ProgramProgressUpdateScalarFieldEnum[]
 }
 
 /**

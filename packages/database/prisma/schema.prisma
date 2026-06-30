@@ -32,6 +32,25 @@ enum OrganizationalPosition {
   @@schema("core")
 }
 
+enum ProgramStatus {
+  PLANNED
+  ONGOING
+  COMPLETED
+  CANCELLED
+  ARCHIVED
+
+  @@schema("nexus")
+}
+
+enum ProgressUpdateStatus {
+  ON_TRACK
+  AT_RISK
+  BLOCKED
+  DONE
+
+  @@schema("nexus")
+}
+
 model CabinetPeriod {
   id        String   @id @default(uuid())
   name      String
@@ -63,6 +82,7 @@ model Birdep {
 
   cabinetPeriod CabinetPeriod @relation(fields: [cabinetPeriodId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   memberships   Membership[]
+  programs      Program[]
 
   @@unique([cabinetPeriodId, code])
   @@unique([cabinetPeriodId, slug])
@@ -126,6 +146,9 @@ model User {
   accounts            Account[]
   userRoles           UserRole[]
   permissionOverrides UserPermissionOverride[]
+  createdPrograms     Program[]                @relation("ProgramCreatedBy")
+  updatedPrograms     Program[]                @relation("ProgramUpdatedBy")
+  progressUpdates     ProgramProgressUpdate[]
 
   @@unique([email])
   @@index([memberId])
@@ -258,5 +281,59 @@ model UserPermissionOverride {
   @@unique([userId, permissionId])
   @@index([userId])
   @@index([permissionId])
+  @@schema("nexus")
+}
+
+model Program {
+  id                String        @id @default(uuid())
+  birdepId          String
+  title             String
+  slug              String
+  description       String        @db.Text
+  objective         String?       @db.Text
+  startDate         DateTime      @db.Date
+  endDate           DateTime?     @db.Date
+  status            ProgramStatus @default(PLANNED)
+  progressPercent   Int           @default(0)
+  pressReleaseUrl   String?
+  isPublishedToTevo Boolean       @default(false)
+  createdByUserId   String?
+  updatedByUserId   String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  birdep          Birdep                  @relation(fields: [birdepId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdBy       User?                   @relation("ProgramCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  updatedBy       User?                   @relation("ProgramUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  progressUpdates ProgramProgressUpdate[]
+
+  @@unique([birdepId, slug])
+  @@index([birdepId])
+  @@index([status])
+  @@index([isPublishedToTevo])
+  @@schema("nexus")
+}
+
+model ProgramProgressUpdate {
+  id              String               @id @default(uuid())
+  programId       String
+  authorUserId    String?
+  title           String
+  note            String               @db.Text
+  obstacle        String?              @db.Text
+  nextStep        String?              @db.Text
+  progressPercent Int
+  status          ProgressUpdateStatus @default(ON_TRACK)
+  reportedAt      DateTime             @default(now())
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  program Program @relation(fields: [programId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  author  User?   @relation(fields: [authorUserId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  @@index([programId])
+  @@index([authorUserId])
+  @@index([status])
+  @@index([reportedAt])
   @@schema("nexus")
 }

@@ -396,7 +396,9 @@ export const ModelName = {
   Permission: 'Permission',
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
-  UserPermissionOverride: 'UserPermissionOverride'
+  UserPermissionOverride: 'UserPermissionOverride',
+  Program: 'Program',
+  ProgramProgressUpdate: 'ProgramProgressUpdate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "cabinetPeriod" | "birdep" | "member" | "membership" | "user" | "session" | "account" | "verification" | "role" | "permission" | "userRole" | "rolePermission" | "userPermissionOverride"
+    modelProps: "cabinetPeriod" | "birdep" | "member" | "membership" | "user" | "session" | "account" | "verification" | "role" | "permission" | "userRole" | "rolePermission" | "userPermissionOverride" | "program" | "programProgressUpdate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1378,6 +1380,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Program: {
+      payload: Prisma.$ProgramPayload<ExtArgs>
+      fields: Prisma.ProgramFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProgramFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProgramFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        findFirst: {
+          args: Prisma.ProgramFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProgramFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        findMany: {
+          args: Prisma.ProgramFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        create: {
+          args: Prisma.ProgramCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        createMany: {
+          args: Prisma.ProgramCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProgramCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        delete: {
+          args: Prisma.ProgramDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        update: {
+          args: Prisma.ProgramUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProgramDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProgramUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProgramUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProgramUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        aggregate: {
+          args: Prisma.ProgramAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProgram>
+        }
+        groupBy: {
+          args: Prisma.ProgramGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProgramCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProgramProgressUpdate: {
+      payload: Prisma.$ProgramProgressUpdatePayload<ExtArgs>
+      fields: Prisma.ProgramProgressUpdateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProgramProgressUpdateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProgramProgressUpdateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        findFirst: {
+          args: Prisma.ProgramProgressUpdateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProgramProgressUpdateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        findMany: {
+          args: Prisma.ProgramProgressUpdateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>[]
+        }
+        create: {
+          args: Prisma.ProgramProgressUpdateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        createMany: {
+          args: Prisma.ProgramProgressUpdateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProgramProgressUpdateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>[]
+        }
+        delete: {
+          args: Prisma.ProgramProgressUpdateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        update: {
+          args: Prisma.ProgramProgressUpdateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProgramProgressUpdateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProgramProgressUpdateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProgramProgressUpdateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProgramProgressUpdateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramProgressUpdatePayload>
+        }
+        aggregate: {
+          args: Prisma.ProgramProgressUpdateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProgramProgressUpdate>
+        }
+        groupBy: {
+          args: Prisma.ProgramProgressUpdateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramProgressUpdateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProgramProgressUpdateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramProgressUpdateCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1600,6 +1750,46 @@ export const UserPermissionOverrideScalarFieldEnum = {
 export type UserPermissionOverrideScalarFieldEnum = (typeof UserPermissionOverrideScalarFieldEnum)[keyof typeof UserPermissionOverrideScalarFieldEnum]
 
 
+export const ProgramScalarFieldEnum = {
+  id: 'id',
+  birdepId: 'birdepId',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  objective: 'objective',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  pressReleaseUrl: 'pressReleaseUrl',
+  isPublishedToTevo: 'isPublishedToTevo',
+  createdByUserId: 'createdByUserId',
+  updatedByUserId: 'updatedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
+
+
+export const ProgramProgressUpdateScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  authorUserId: 'authorUserId',
+  title: 'title',
+  note: 'note',
+  obstacle: 'obstacle',
+  nextStep: 'nextStep',
+  progressPercent: 'progressPercent',
+  status: 'status',
+  reportedAt: 'reportedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramProgressUpdateScalarFieldEnum = (typeof ProgramProgressUpdateScalarFieldEnum)[keyof typeof ProgramProgressUpdateScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1694,6 +1884,20 @@ export type ListEnumOrganizationalPositionFieldRefInput<$PrismaModel> = FieldRef
 
 
 /**
+ * Reference to a field of type 'ProgramStatus'
+ */
+export type EnumProgramStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgramStatus[]'
+ */
+export type ListEnumProgramStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1704,6 +1908,34 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgressUpdateStatus'
+ */
+export type EnumProgressUpdateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgressUpdateStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgressUpdateStatus[]'
+ */
+export type ListEnumProgressUpdateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgressUpdateStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1829,6 +2061,8 @@ export type GlobalOmitConfig = {
   userRole?: Prisma.UserRoleOmit
   rolePermission?: Prisma.RolePermissionOmit
   userPermissionOverride?: Prisma.UserPermissionOverrideOmit
+  program?: Prisma.ProgramOmit
+  programProgressUpdate?: Prisma.ProgramProgressUpdateOmit
 }
 
 /* Types for Logging */

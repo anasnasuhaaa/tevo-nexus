@@ -63,7 +63,9 @@ export const ModelName = {
   Permission: 'Permission',
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
-  UserPermissionOverride: 'UserPermissionOverride'
+  UserPermissionOverride: 'UserPermissionOverride',
+  Program: 'Program',
+  ProgramProgressUpdate: 'ProgramProgressUpdate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -263,6 +265,46 @@ export const UserPermissionOverrideScalarFieldEnum = {
 } as const
 
 export type UserPermissionOverrideScalarFieldEnum = (typeof UserPermissionOverrideScalarFieldEnum)[keyof typeof UserPermissionOverrideScalarFieldEnum]
+
+
+export const ProgramScalarFieldEnum = {
+  id: 'id',
+  birdepId: 'birdepId',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  objective: 'objective',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  pressReleaseUrl: 'pressReleaseUrl',
+  isPublishedToTevo: 'isPublishedToTevo',
+  createdByUserId: 'createdByUserId',
+  updatedByUserId: 'updatedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
+
+
+export const ProgramProgressUpdateScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  authorUserId: 'authorUserId',
+  title: 'title',
+  note: 'note',
+  obstacle: 'obstacle',
+  nextStep: 'nextStep',
+  progressPercent: 'progressPercent',
+  status: 'status',
+  reportedAt: 'reportedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramProgressUpdateScalarFieldEnum = (typeof ProgramProgressUpdateScalarFieldEnum)[keyof typeof ProgramProgressUpdateScalarFieldEnum]
 
 
 export const SortOrder = {

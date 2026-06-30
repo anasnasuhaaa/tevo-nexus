@@ -16,6 +16,8 @@ async function getDashboardData() {
     activeMembers,
     totalUsers,
     totalRoles,
+    totalPrograms,
+    totalProgressUpdates,
   ] = await Promise.all([
     prisma.birdep.count(),
     prisma.birdep.count({
@@ -31,6 +33,8 @@ async function getDashboardData() {
     }),
     prisma.user.count(),
     prisma.role.count(),
+    prisma.program.count(),
+    prisma.programProgressUpdate.count(),
   ]);
 
   return {
@@ -40,9 +44,10 @@ async function getDashboardData() {
     activeMembers,
     totalUsers,
     totalRoles,
+    totalPrograms,
+    totalProgressUpdates,
   };
 }
-
 export default async function DashboardPage() {
   const data = await getDashboardData();
 
@@ -50,7 +55,8 @@ export default async function DashboardPage() {
     {
       title: "Unit Organisasi",
       value: data.totalBirdeps,
-      description: `${data.activeBirdeps} unit aktif`,
+      // description: `${data.activeBirdeps} unit aktif`,
+      description: "BPH, Biro, Departemen",
       icon: Building2,
     },
     {
@@ -61,14 +67,14 @@ export default async function DashboardPage() {
     },
     {
       title: "Program Kerja",
-      value: 0,
-      description: "Belum ada program kerja terdata",
+      value: data.totalPrograms,
+      description: "Program kerja terdata",
       icon: FileText,
     },
     {
       title: "Progress Update",
-      value: 0,
-      description: "Belum ada laporan progress",
+      value: data.totalProgressUpdates,
+      description: "Laporan progress terdata",
       icon: Activity,
     },
   ];

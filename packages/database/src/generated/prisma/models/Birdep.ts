@@ -232,6 +232,7 @@ export type BirdepWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Birdep"> | Date | string
   cabinetPeriod?: Prisma.XOR<Prisma.CabinetPeriodScalarRelationFilter, Prisma.CabinetPeriodWhereInput>
   memberships?: Prisma.MembershipListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
 }
 
 export type BirdepOrderByWithRelationInput = {
@@ -248,6 +249,7 @@ export type BirdepOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   cabinetPeriod?: Prisma.CabinetPeriodOrderByWithRelationInput
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
+  programs?: Prisma.ProgramOrderByRelationAggregateInput
 }
 
 export type BirdepWhereUniqueInput = Prisma.AtLeast<{
@@ -269,6 +271,7 @@ export type BirdepWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Birdep"> | Date | string
   cabinetPeriod?: Prisma.XOR<Prisma.CabinetPeriodScalarRelationFilter, Prisma.CabinetPeriodWhereInput>
   memberships?: Prisma.MembershipListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
 }, "id" | "cabinetPeriodId_code" | "cabinetPeriodId_slug">
 
 export type BirdepOrderByWithAggregationInput = {
@@ -318,6 +321,7 @@ export type BirdepCreateInput = {
   updatedAt?: Date | string
   cabinetPeriod: Prisma.CabinetPeriodCreateNestedOneWithoutBirdepsInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutPrimaryBirdepInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepUncheckedCreateInput = {
@@ -333,6 +337,7 @@ export type BirdepUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutPrimaryBirdepInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepUpdateInput = {
@@ -348,6 +353,7 @@ export type BirdepUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cabinetPeriod?: Prisma.CabinetPeriodUpdateOneRequiredWithoutBirdepsNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutPrimaryBirdepNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBirdepNestedInput
 }
 
 export type BirdepUncheckedUpdateInput = {
@@ -363,6 +369,7 @@ export type BirdepUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutPrimaryBirdepNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBirdepNestedInput
 }
 
 export type BirdepCreateManyInput = {
@@ -533,6 +540,20 @@ export type BirdepUpdateOneRequiredWithoutMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BirdepUpdateToOneWithWhereWithoutMembershipsInput, Prisma.BirdepUpdateWithoutMembershipsInput>, Prisma.BirdepUncheckedUpdateWithoutMembershipsInput>
 }
 
+export type BirdepCreateNestedOneWithoutProgramsInput = {
+  create?: Prisma.XOR<Prisma.BirdepCreateWithoutProgramsInput, Prisma.BirdepUncheckedCreateWithoutProgramsInput>
+  connectOrCreate?: Prisma.BirdepCreateOrConnectWithoutProgramsInput
+  connect?: Prisma.BirdepWhereUniqueInput
+}
+
+export type BirdepUpdateOneRequiredWithoutProgramsNestedInput = {
+  create?: Prisma.XOR<Prisma.BirdepCreateWithoutProgramsInput, Prisma.BirdepUncheckedCreateWithoutProgramsInput>
+  connectOrCreate?: Prisma.BirdepCreateOrConnectWithoutProgramsInput
+  upsert?: Prisma.BirdepUpsertWithoutProgramsInput
+  connect?: Prisma.BirdepWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BirdepUpdateToOneWithWhereWithoutProgramsInput, Prisma.BirdepUpdateWithoutProgramsInput>, Prisma.BirdepUncheckedUpdateWithoutProgramsInput>
+}
+
 export type BirdepCreateWithoutCabinetPeriodInput = {
   id?: string
   name: string
@@ -545,6 +566,7 @@ export type BirdepCreateWithoutCabinetPeriodInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipCreateNestedManyWithoutPrimaryBirdepInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepUncheckedCreateWithoutCabinetPeriodInput = {
@@ -559,6 +581,7 @@ export type BirdepUncheckedCreateWithoutCabinetPeriodInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutPrimaryBirdepInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepCreateOrConnectWithoutCabinetPeriodInput = {
@@ -616,6 +639,7 @@ export type BirdepCreateWithoutMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cabinetPeriod: Prisma.CabinetPeriodCreateNestedOneWithoutBirdepsInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepUncheckedCreateWithoutMembershipsInput = {
@@ -630,6 +654,7 @@ export type BirdepUncheckedCreateWithoutMembershipsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBirdepInput
 }
 
 export type BirdepCreateOrConnectWithoutMembershipsInput = {
@@ -660,6 +685,7 @@ export type BirdepUpdateWithoutMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cabinetPeriod?: Prisma.CabinetPeriodUpdateOneRequiredWithoutBirdepsNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBirdepNestedInput
 }
 
 export type BirdepUncheckedUpdateWithoutMembershipsInput = {
@@ -674,6 +700,83 @@ export type BirdepUncheckedUpdateWithoutMembershipsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBirdepNestedInput
+}
+
+export type BirdepCreateWithoutProgramsInput = {
+  id?: string
+  name: string
+  code: string
+  slug: string
+  unitType: $Enums.UnitType
+  description: string
+  focusArea: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cabinetPeriod: Prisma.CabinetPeriodCreateNestedOneWithoutBirdepsInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutPrimaryBirdepInput
+}
+
+export type BirdepUncheckedCreateWithoutProgramsInput = {
+  id?: string
+  cabinetPeriodId: string
+  name: string
+  code: string
+  slug: string
+  unitType: $Enums.UnitType
+  description: string
+  focusArea: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutPrimaryBirdepInput
+}
+
+export type BirdepCreateOrConnectWithoutProgramsInput = {
+  where: Prisma.BirdepWhereUniqueInput
+  create: Prisma.XOR<Prisma.BirdepCreateWithoutProgramsInput, Prisma.BirdepUncheckedCreateWithoutProgramsInput>
+}
+
+export type BirdepUpsertWithoutProgramsInput = {
+  update: Prisma.XOR<Prisma.BirdepUpdateWithoutProgramsInput, Prisma.BirdepUncheckedUpdateWithoutProgramsInput>
+  create: Prisma.XOR<Prisma.BirdepCreateWithoutProgramsInput, Prisma.BirdepUncheckedCreateWithoutProgramsInput>
+  where?: Prisma.BirdepWhereInput
+}
+
+export type BirdepUpdateToOneWithWhereWithoutProgramsInput = {
+  where?: Prisma.BirdepWhereInput
+  data: Prisma.XOR<Prisma.BirdepUpdateWithoutProgramsInput, Prisma.BirdepUncheckedUpdateWithoutProgramsInput>
+}
+
+export type BirdepUpdateWithoutProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  unitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  focusArea?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cabinetPeriod?: Prisma.CabinetPeriodUpdateOneRequiredWithoutBirdepsNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutPrimaryBirdepNestedInput
+}
+
+export type BirdepUncheckedUpdateWithoutProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cabinetPeriodId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  unitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  focusArea?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutPrimaryBirdepNestedInput
 }
 
 export type BirdepCreateManyCabinetPeriodInput = {
@@ -701,6 +804,7 @@ export type BirdepUpdateWithoutCabinetPeriodInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUpdateManyWithoutPrimaryBirdepNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBirdepNestedInput
 }
 
 export type BirdepUncheckedUpdateWithoutCabinetPeriodInput = {
@@ -715,6 +819,7 @@ export type BirdepUncheckedUpdateWithoutCabinetPeriodInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutPrimaryBirdepNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBirdepNestedInput
 }
 
 export type BirdepUncheckedUpdateManyWithoutCabinetPeriodInput = {
@@ -737,10 +842,12 @@ export type BirdepUncheckedUpdateManyWithoutCabinetPeriodInput = {
 
 export type BirdepCountOutputType = {
   memberships: number
+  programs: number
 }
 
 export type BirdepCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | BirdepCountOutputTypeCountMembershipsArgs
+  programs?: boolean | BirdepCountOutputTypeCountProgramsArgs
 }
 
 /**
@@ -760,6 +867,13 @@ export type BirdepCountOutputTypeCountMembershipsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.MembershipWhereInput
 }
 
+/**
+ * BirdepCountOutputType without action
+ */
+export type BirdepCountOutputTypeCountProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramWhereInput
+}
+
 
 export type BirdepSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -775,6 +889,7 @@ export type BirdepSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   cabinetPeriod?: boolean | Prisma.CabinetPeriodDefaultArgs<ExtArgs>
   memberships?: boolean | Prisma.Birdep$membershipsArgs<ExtArgs>
+  programs?: boolean | Prisma.Birdep$programsArgs<ExtArgs>
   _count?: boolean | Prisma.BirdepCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["birdep"]>
 
@@ -826,6 +941,7 @@ export type BirdepOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type BirdepInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cabinetPeriod?: boolean | Prisma.CabinetPeriodDefaultArgs<ExtArgs>
   memberships?: boolean | Prisma.Birdep$membershipsArgs<ExtArgs>
+  programs?: boolean | Prisma.Birdep$programsArgs<ExtArgs>
   _count?: boolean | Prisma.BirdepCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BirdepIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -840,6 +956,7 @@ export type $BirdepPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     cabinetPeriod: Prisma.$CabinetPeriodPayload<ExtArgs>
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
+    programs: Prisma.$ProgramPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1249,6 +1366,7 @@ export interface Prisma__BirdepClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   cabinetPeriod<T extends Prisma.CabinetPeriodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CabinetPeriodDefaultArgs<ExtArgs>>): Prisma.Prisma__CabinetPeriodClient<runtime.Types.Result.GetResult<Prisma.$CabinetPeriodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   memberships<T extends Prisma.Birdep$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Birdep$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programs<T extends Prisma.Birdep$programsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Birdep$programsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1711,6 +1829,30 @@ export type Birdep$membershipsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.MembershipScalarFieldEnum | Prisma.MembershipScalarFieldEnum[]
+}
+
+/**
+ * Birdep.programs
+ */
+export type Birdep$programsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Program
+   */
+  select?: Prisma.ProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Program
+   */
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
+  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
 }
 
 /**

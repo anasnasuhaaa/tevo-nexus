@@ -32,3 +32,24 @@ export const OrganizationalPosition = {
 } as const
 
 export type OrganizationalPosition = (typeof OrganizationalPosition)[keyof typeof OrganizationalPosition]
+
+
+export const ProgramStatus = {
+  PLANNED: 'PLANNED',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ProgramStatus = (typeof ProgramStatus)[keyof typeof ProgramStatus]
+
+
+export const ProgressUpdateStatus = {
+  ON_TRACK: 'ON_TRACK',
+  AT_RISK: 'AT_RISK',
+  BLOCKED: 'BLOCKED',
+  DONE: 'DONE'
+} as const
+
+export type ProgressUpdateStatus = (typeof ProgressUpdateStatus)[keyof typeof ProgressUpdateStatus]

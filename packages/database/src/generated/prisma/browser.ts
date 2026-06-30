@@ -82,3 +82,13 @@ export type RolePermission = Prisma.RolePermissionModel
  * 
  */
 export type UserPermissionOverride = Prisma.UserPermissionOverrideModel
+/**
+ * Model Program
+ * 
+ */
+export type Program = Prisma.ProgramModel
+/**
+ * Model ProgramProgressUpdate
+ * 
+ */
+export type ProgramProgressUpdate = Prisma.ProgramProgressUpdateModel
