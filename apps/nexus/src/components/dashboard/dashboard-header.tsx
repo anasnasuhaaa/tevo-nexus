@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   BarChart3,
   FileText,
@@ -15,6 +18,7 @@ import {
 import { LogoutButton } from "@/components/dashboard/logout-button";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type DashboardHeaderProps = {
   user: {
@@ -62,7 +66,17 @@ const mobileMenus = [
   },
 ];
 
+function isActivePath(pathname: string, href: string) {
+  if (href === "/dashboard") {
+    return pathname === "/dashboard";
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function DashboardHeader({ user }: DashboardHeaderProps) {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur">
       <div className="flex h-16 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
@@ -95,12 +109,18 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
               <nav className="space-y-1">
                 {mobileMenus.map((menu) => {
                   const Icon = menu.icon;
+                  const active = isActivePath(pathname, menu.href);
 
                   return (
                     <Link
                       key={menu.href}
                       href={menu.href}
-                      className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition hover:bg-primary/10 hover:text-primary"
+                      className={cn(
+                        "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition",
+                        active
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+                      )}
                     >
                       <Icon className="size-4" />
                       {menu.title}

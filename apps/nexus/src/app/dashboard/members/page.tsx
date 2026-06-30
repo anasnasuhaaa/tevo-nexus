@@ -1,27 +1,9 @@
 import { prisma } from "@orma/database";
-import {
-  BadgeCheck,
-  Search,
-  UserRound,
-  UsersRound,
-} from "lucide-react";
+import { BadgeCheck, Search, UserRound, UsersRound } from "lucide-react";
 
-function getPositionLabel(position: string) {
-  const labels: Record<string, string> = {
-    KETUA_ORGANISASI: "Ketua Organisasi",
-    WAKIL_KETUA_ORGANISASI: "Wakil Ketua Organisasi",
-    SEKRETARIS_INTERNAL: "Sekretaris Internal",
-    SEKRETARIS_EKSTERNAL: "Sekretaris Eksternal",
-    BENDAHARA_INTERNAL: "Bendahara Internal",
-    BENDAHARA_EKSTERNAL: "Bendahara Eksternal",
-    KETUA_BIRDEP: "Ketua Birdep",
-    SEKRETARIS_BIRDEP: "Sekretaris Birdep",
-    BENDAHARA_BIRDEP: "Bendahara Birdep",
-    ANGGOTA_BIRDEP: "Anggota Birdep",
-  };
+import { DataTable } from "@/components/data-table/data-table";
 
-  return labels[position] ?? position;
-}
+import { memberColumns, MemberTableRow } from "./columns";
 
 async function getMembers() {
   return prisma.member.findMany({
@@ -56,6 +38,26 @@ export default async function MembersPage() {
   const activeMembers = members.filter((member) => member.isActive);
   const membersWithAccount = members.filter((member) => member.users.length > 0);
 
+  const tableData: MemberTableRow[] = members.map((member, index) => {
+    const latestMembership = member.memberships[0];
+    const user = member.users[0];
+
+    return {
+      id: member.id,
+      number: index + 1,
+      fullName: member.fullName,
+      nim: member.nim,
+      instagram: member.instagram,
+      birdepName: latestMembership?.primaryBirdep.name ?? "Belum ada membership",
+      cabinetName: latestMembership?.cabinetPeriod.name ?? "-",
+      position: latestMembership?.organizationalPosition ?? "-",
+      internalTitle: latestMembership?.internalTitle ?? null,
+      email: user?.email ?? null,
+      role: user?.role ?? null,
+      isActive: member.isActive,
+    };
+  });
+
   return (
     <div className="space-y-6">
       <section className="rounded-3xl border bg-card p-6 shadow-sm">
@@ -70,15 +72,14 @@ export default async function MembersPage() {
             </h1>
 
             <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Halaman ini membaca data langsung dari database. Untuk tahap ini,
-              tabel masih bersifat read-only dan digunakan untuk memastikan
-              relasi Member, Membership, Birdep, dan User sudah berjalan.
+              Halaman ini membaca data langsung dari database. Tabel sudah
+              memakai DataTable agar mendukung filter, sorting, dan pagination.
             </p>
           </div>
 
           <div className="flex items-center gap-2 rounded-2xl border bg-background px-3 py-2 text-sm text-muted-foreground">
             <Search className="size-4" />
-            Search dan filter akan dibuat di tahap berikutnya
+            CRUD dan import akan dibuat setelah fondasi UI stabil
           </div>
         </div>
       </section>
@@ -127,133 +128,20 @@ export default async function MembersPage() {
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-3xl border bg-card shadow-sm">
-        <div className="border-b px-5 py-4">
+      <section className="rounded-3xl border bg-card p-5 shadow-sm">
+        <div className="mb-5">
           <h2 className="font-black tracking-tight">Tabel Anggota</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Menampilkan data awal dari database Nexus.
+            Filter saat ini menggunakan kolom nama.
           </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] text-left text-sm">
-            <thead className="border-b bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
-              <tr>
-                <th className="px-5 py-3 font-semibold">#</th>
-                <th className="px-5 py-3 font-semibold">Nama</th>
-                <th className="px-5 py-3 font-semibold">NIM</th>
-                <th className="px-5 py-3 font-semibold">Birdep</th>
-                <th className="px-5 py-3 font-semibold">Jabatan</th>
-                <th className="px-5 py-3 font-semibold">Akun</th>
-                <th className="px-5 py-3 font-semibold">Status</th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y">
-              {members.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={7}
-                    className="px-5 py-10 text-center text-muted-foreground"
-                  >
-                    Belum ada data anggota.
-                  </td>
-                </tr>
-              ) : (
-                members.map((member, index) => {
-                  const latestMembership = member.memberships[0];
-                  const user = member.users[0];
-
-                  return (
-                    <tr key={member.id} className="align-top">
-                      <td className="px-5 py-4 text-muted-foreground">
-                        {index + 1}
-                      </td>
-
-                      <td className="px-5 py-4">
-                        <div className="font-semibold">{member.fullName}</div>
-
-                        {member.instagram ? (
-                          <div className="mt-1 text-xs text-muted-foreground">
-                            @{member.instagram}
-                          </div>
-                        ) : null}
-                      </td>
-
-                      <td className="px-5 py-4 text-muted-foreground">
-                        {member.nim}
-                      </td>
-
-                      <td className="px-5 py-4">
-                        {latestMembership ? (
-                          <div>
-                            <div className="font-medium">
-                              {latestMembership.primaryBirdep.name}
-                            </div>
-                            <div className="mt-1 text-xs text-muted-foreground">
-                              {latestMembership.cabinetPeriod.name}
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="text-muted-foreground">
-                            Belum ada membership
-                          </span>
-                        )}
-                      </td>
-
-                      <td className="px-5 py-4">
-                        {latestMembership ? (
-                          <div>
-                            <span className="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                              {getPositionLabel(
-                                latestMembership.organizationalPosition,
-                              )}
-                            </span>
-
-                            {latestMembership.internalTitle ? (
-                              <div className="mt-2 text-xs text-muted-foreground">
-                                {latestMembership.internalTitle}
-                              </div>
-                            ) : null}
-                          </div>
-                        ) : (
-                          <span className="text-muted-foreground">-</span>
-                        )}
-                      </td>
-
-                      <td className="px-5 py-4">
-                        {user ? (
-                          <div>
-                            <div className="font-medium">{user.email}</div>
-                            <div className="mt-1 text-xs text-muted-foreground">
-                              Role: {user.role}
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="text-muted-foreground">
-                            Belum punya akun
-                          </span>
-                        )}
-                      </td>
-
-                      <td className="px-5 py-4">
-                        {member.isActive ? (
-                          <span className="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                            Aktif
-                          </span>
-                        ) : (
-                          <span className="inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-semibold text-muted-foreground">
-                            Nonaktif
-                          </span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={memberColumns}
+          data={tableData}
+          searchKey="fullName"
+          searchPlaceholder="Cari nama anggota..."
+        />
       </section>
     </div>
   );
