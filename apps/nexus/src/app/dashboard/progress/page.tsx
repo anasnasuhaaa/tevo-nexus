@@ -127,10 +127,7 @@ export default async function ProgressPage() {
             </div>
 
             <Link href="/dashboard/progress/import">
-              <Button
-                disabled
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto"
-              >
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto">
                 <Upload className="size-4" />
                 Import XLSX
               </Button>
