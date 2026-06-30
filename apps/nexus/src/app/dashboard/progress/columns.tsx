@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
@@ -63,7 +64,13 @@ export const progressUpdateColumns: ColumnDef<ProgressUpdateTableRow>[] = [
     ),
     cell: ({ row }) => (
       <div>
-        <div className="font-semibold">{row.original.title}</div>
+        <Link
+          href={`/dashboard/progress/${row.original.id}`}
+          className="font-semibold text-foreground transition hover:text-primary"
+        >
+          {row.original.title}
+        </Link>
+
         <div className="mt-1 text-xs text-muted-foreground">
           Dilaporkan: {row.original.reportedAt}
         </div>

@@ -113,11 +113,12 @@ export default async function ProgramsPage() {
                 Import XLSX
               </Button>
             </Link>
-
-            <Button disabled className="bg-primary text-primary-foreground">
-              <Plus className="size-4" />
-              Tambah Program
-            </Button>
+            <Link href="/dashboard/programs/new">
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto">
+                <Plus className="size-4" />
+                Tambah Program
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
