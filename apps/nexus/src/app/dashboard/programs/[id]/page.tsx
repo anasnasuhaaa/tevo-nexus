@@ -11,6 +11,7 @@ import {
   Flag,
   Landmark,
   LinkIcon,
+  Pencil,
   ShieldCheck,
 } from "lucide-react";
 
@@ -142,11 +143,18 @@ export default async function ProgramDetailPage({
       <section className="rounded-3xl border bg-card p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               <Link href="/dashboard/programs">
                 <Button variant="outline">
                   <ArrowLeft className="size-4" />
                   Kembali
+                </Button>
+              </Link>
+
+              <Link href={`/dashboard/programs/${program.id}/edit`}>
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Pencil className="size-4" />
+                  Edit Program
                 </Button>
               </Link>
             </div>
