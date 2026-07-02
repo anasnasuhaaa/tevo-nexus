@@ -7,7 +7,7 @@ import {
   CalendarDays,
   FileText,
   Flag,
-  Plus,
+  Pencil,
   Landmark,
   ListChecks,
   Route,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { DeleteProgressButton } from "./delete-progress-button";
 
 type ProgressDetailPageProps = {
   params: Promise<{
@@ -123,13 +124,30 @@ export default async function ProgressDetailPage({
       <section className="rounded-3xl border bg-card p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               <Link href="/dashboard/progress">
                 <Button variant="outline">
                   <ArrowLeft className="size-4" />
                   Kembali
                 </Button>
               </Link>
+
+              {progress.program.status !== "ARCHIVED" ? (
+                <>
+                  <Link href={`/dashboard/progress/${progress.id}/edit`}>
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                      <Pencil className="size-4" />
+                      Edit Progress
+                    </Button>
+                  </Link>
+
+                  <DeleteProgressButton
+                    progressId={progress.id}
+                    programId={progress.program.id}
+                    progressTitle={progress.title}
+                  />
+                </>
+              ) : null}
             </div>
 
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">
